@@ -5,7 +5,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {columns: [], data: []}
+    this.state = {columns: [], data: [], totalNumberOfValues: 0}
     this.onSelectChange = this.onSelectChange.bind(this);
   }
 
@@ -23,6 +23,13 @@ class App extends Component {
 
   onSelectChange(event) {
     this.setTableData(event.target.value);
+    this.setTotalNumberOfValues(event.target.value);
+  }
+
+  totalDisplay() {
+    if (this.state.data.length > 0) {
+      return <span className='total'>Total distinct values: {this.state.data[0].total_count}</span>
+    }
   }
 
   render() {
@@ -35,6 +42,9 @@ class App extends Component {
             )}
           </select>
         </span>
+        <div className='total'>
+          {this.totalDisplay()}
+        </div>
         <table>
           <tr>
             <th>Value</th>

@@ -46,3 +46,9 @@ it('if values are null then show N/A in table', () => {
   expect(app.find('table td.value').text()).toBe('N/A');
   expect(app.find('table td.average-age').text()).toBe('N/A');
 });
+
+it('total number of values is shown in a span', () => {
+  const app = shallow(<App />);
+  app.setState({data: [{value: 'Male', count: 5, 'average age': 50, total_count: 9000}]});
+  expect(app.find('span.total').text()).toBe('Total distinct values: 9000');
+});

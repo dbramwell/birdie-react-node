@@ -21,8 +21,13 @@ router.get('/:column/', function(req, res, next) {
   db.serialize(() => {
     db.all(`SELECT distinct(${columnName}) as value,
                    count(*) as count,
-                   avg(age) as 'average age'
-            from census_learn_sql
+                   avg(age) as 'average age',
+                   c.total_count as total_count
+            from census_learn_sql, (
+              SELECT count(distinct(${columnName})) +
+                count(distinct(case when ${columnName} is null then 1 end)) as total_count
+              from census_learn_sql
+            ) c
             group by ${columnName}
             order by count desc
             limit 100;`, (err, columns) => {
