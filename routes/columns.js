@@ -17,12 +17,13 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:column/', function(req, res, next) {
+  const columnName = '`' + req.params.column + '`';
   db.serialize(() => {
-    db.all(`SELECT distinct(${req.params.column}) as value,
+    db.all(`SELECT distinct(${columnName}) as value,
                    count(*) as count,
                    avg(age) as 'average age'
             from census_learn_sql
-            group by ${req.params.column}
+            group by ${columnName}
             order by count desc
             limit 100;`, (err, columns) => {
       if (err) {
