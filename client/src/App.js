@@ -23,7 +23,6 @@ class App extends Component {
 
   onSelectChange(event) {
     this.setTableData(event.target.value);
-    this.setTotalNumberOfValues(event.target.value);
   }
 
   totalDisplay() {
