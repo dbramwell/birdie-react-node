@@ -20,7 +20,7 @@ router.get('/:column/', function(req, res, next) {
   db.serialize(() => {
     db.all(`SELECT DISTINCT(${columnName}) AS value,
                    COUNT(*) AS count,
-                   AVG(age) AS 'average age',
+                   printf("%.2f", AVG(age)) AS 'average age',
                    c.total_count AS total_count
             FROM census_learn_sql,
                  (SELECT COUNT(DISTINCT(${columnName})) +
