@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+- 7.10.1
+before_script:
+- npm install
+deploy:
+  provider: heroku
+  app: limitless-badlands-63268
+  on:
+    repo: dbramwell/birdie-react-node
