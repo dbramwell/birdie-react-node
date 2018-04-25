@@ -41,7 +41,7 @@ class App extends Component {
             )}
           </select>
         </span>
-        <div className='total'>
+        <div>
           {this.totalDisplay()}
         </div>
         <table>
