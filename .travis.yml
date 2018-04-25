@@ -2,7 +2,7 @@ language: node_js
 node_js:
 - 7.10.1
 before_script:
-- npm install && cd client && npm install
+- npm install && cd client && npm install; cd ..
 deploy:
   provider: heroku
   app: limitless-badlands-63268
@@ -10,4 +10,3 @@ deploy:
     repo: dbramwell/birdie-react-node
   api_key:
     secure: b5BP5usqRQk4aSqkEXnfK6Db7IX1DYjh0PLoyPAvxB9ZlCcG5Qoo8tWcIIo9UwLJHMAC1aaRyLQYxyT91xhpPazxgKMsCJupt4EwPNVfGZBkeRC0291xrLom1MvM2GupplxRGBGmy/I3A3+6YKY8W+1AxZwN9xcaQbsd6oKAmmVfVJduI+x9/6DRbJWqbTy3Q9DTonQ5TOcaXkrkxhmFlGyJSXqAHsED9RCH0B9xduwIgCMsh1WwOW7qdYfPTPGT/gNMWdVKs5618STbRwapc8nND6qYFXaWW/qf6KJ3zcBD3567m9lOoO5+uQEPtNIMA8R3Lp7t6n8bttZPH7pmPwWlGHeiA5ufjYIiBuMSyaqnr79Xzd1zV8Hq9gCbTKT3xT1aZi1tRu98Hu0zznAxc4H00rirAfRN5V/SbmH8qpvT75HMWX6UgBJx8obngRp2YAkv8pg/sQcC5tRnlED2uHdOxCX04UfT7K3iY0Fhq8GTXlrU95l7zlQQY3NpEME3EkUSLutRLB+62l5Ak3WV/f68vj5DfEPYB8yeQNvsFy99pggcELJPDH2IUvAflT5pEo1f/mtPcd2+0CBuf0XNQJeHSEjHleKEIrXPlKQ32X5xYGlVMXi90bO0Fk2nMCwU+ZpxcBTVJktlbKTzxjoSv4LKk00iMrL/M6iHYZOVnOU=
-  run: "cd db && wget http://birdie.care/wp-content/uploads/us-census.db.gz && gunzip us-census.db.gz"

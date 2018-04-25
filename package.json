@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "cd client && npm test",
+    "test": "cd client && npm test; cd ..",
     "heroku-postbuild": "cd db && wget http://birdie.care/wp-content/uploads/us-census.db.gz && gunzip us-census.db.gz && cd ../client && npm install && npm run build"
   },
   "dependencies": {
