@@ -28,12 +28,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Variable: </h1>
-        <select onChange={this.onSelectChange} >
-          {this.state.columns.map((column, index) =>
-            <option key={index} value={column}>{column}</option>
-          )}
-        </select>
+        <span>Variable:
+          <select onChange={this.onSelectChange} >
+            {this.state.columns.map((column, index) =>
+              <option key={index} value={column}>{column}</option>
+            )}
+          </select>
+        </span>
         <table>
           <tr>
             <th>Value</th>
