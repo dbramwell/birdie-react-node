@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux'
+import setColumns from './actions/set_columns'
+import setData from './actions/set_data'
+import {bindActionCreators} from 'redux'
 import './App.css';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {columns: [], data: [], totalNumberOfValues: 0};
     this.onSelectChange = this.onSelectChange.bind(this);
   }
 
   componentDidMount() {
     return fetch('/columns')
       .then(res => res.json())
-      .then(columns => this.setState({ columns }));
+      .then(columns => this.props.setColumns(columns));
   }
 
   setTableData(column) {
     return fetch(`/columns/${column}`)
       .then(res => res.json())
-      .then(data => this.setState({ data }));
+      .then(data => this.props.setData(data));
   }
 
   onSelectChange(event) {
@@ -26,8 +29,8 @@ class App extends Component {
   }
 
   totalDisplay() {
-    if (this.state.data.length > 0) {
-      return <span className='total'>Total distinct values: {this.state.data[0].total_count}</span>;
+    if (this.props.data.length > 0) {
+      return <span className='total'>Total distinct values: {this.props.data[0].total_count}</span>;
     }
   }
 
@@ -36,7 +39,7 @@ class App extends Component {
       <div className='App'>
         <span>Variable:
           <select onChange={this.onSelectChange} >
-            {this.state.columns.map((column, index) =>
+            {this.props.columns.map((column, index) =>
               <option key={index} value={column}>{column}</option>
             )}
           </select>
@@ -50,7 +53,7 @@ class App extends Component {
             <th>Count</th>
             <th>Average Age</th>
           </tr>
-          {this.state.data.map((d, index) =>
+          {this.props.data.map((d, index) =>
             <tr key={index}>
               <td className='value'>{d.value || 'N/A' }</td>
               <td className='count'>{d.count}</td>
@@ -63,4 +66,18 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    columns: state.columns,
+    data: state.data
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    setColumns: setColumns,
+    setData: setData
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
